@@ -1,0 +1,79 @@
+{% extends 'core/base.html' %}
+{% block title %}Cursos{% endblock %}
+{% block background %}{% load static %}{% static 'core/img/cursos.jpg' %}{% endblock %}
+{% block headers %}
+	<h1>Cursos</h1>
+	<span class="subheading">Información de Cursos</span>
+{% endblock %}
+{% block content %}
+	<body>
+		<div class="row">
+			<div class="col-sm-10 col-md-5 col-lg-3 col-xl-3">
+				{% if messages %}
+					{% for message in messages %}
+						<div class="alert alert-dismissible alert-success">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<strong class="text-dark">{{ message }}</strong>
+						</div>
+					{% endfor %}
+				{% endif %}
+				<h2>Ingreso de Cursos</h2>
+				<div class="card">
+					<div class="card-body">
+						<form action="/registrar/" method="POST">{% csrf_token %}
+							<div class="form-group">
+								<input type="text" id="txtCodigo" name="txtCodigo" class="form-control"
+									placeholder="Código" minlength="3" maxlength="3" required />
+							</div>
+							<div class="form-group">
+								<input type="text" id="txtProfesor" name="txtProfesor" class="form-control"
+									placeholder="Profesor" maxlength="50" required />
+							</div>
+							<div class="form-group">
+								<input type="text" id="txtMateria" name="txtMateria" class="form-control"
+									placeholder="Materia" maxlength="50" required />
+							</div>
+							<div class="form-group">
+								<input type="text" id="txtHorario" name="txtHorario" class="form-control"
+									placeholder="Horario" maxlength="50" required />
+							</div>
+							<div class="form-group">
+								<button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div style="font-size: 0.8em" class="col-sm-14 col-md-7 col-lg-9 col-xl-9">
+				<h2>Listado de Cursos</h2>
+				<div class="table-responsive py-2">
+					<tbody>
+						<table class="table table-stripped table-sm">
+							<thead>
+								<tr>
+									<th>Nº</th>
+									<th>Código</th>
+									<th>Profesor</th>
+									<th>Materia</th>
+									<th>Horario</th>
+									<th colspan="2">Acciones</th>
+								</tr>
+							</thead>
+							{% for c in cursos %}
+								<tr>
+									<td>{{forloop.counter}}</td>
+									<td>{{c.codigo}}</td>
+									<td>{{c.profesor}}</td>
+									<td>{{c.materia}}</td>
+									<td>{{c.horario}}</td>
+									<td><a href="/editar/{{c.codigo}}" class="btn btn-warning btn-xs">Editar</a></td>
+									<td><a href="/eliminar/{{c.codigo}}" class="btn btn-danger btn-xs btnEliminacion">Eliminar</a></td>
+								</tr>
+							{% endfor %}
+						</table>
+					</tbody>
+				</div>
+			</div>
+		</div>
+	</body>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'core/base.html' %}
+{% block title %}Estudiantes{% endblock %}
+{% block background %}{% load static %}{% static 'core/img/estudiantes.jpg' %}{% endblock %}
+{% block headers %}
+<h1>Edición</h1>
+<span class="subheading">Información Estudiantes</span>
+{% endblock %}
+{% block content %}
+  <body>
+    <div class="row">
+      <div class="col-md-4 offset-md-4">
+        <h2>Edición Estudiantes</h2>
+        <div class="card">
+          <div class="card-body">
+            <form action="/actualizarE/" method="POST">{% csrf_token %}
+              <div class="form-group">
+                <input type="text" id="txtCedula" name="txtCedula" value="{{estudiantes.cedula}}"
+                  class="form-control" placeholder="Cédula" minlength="10" maxlength="10" readonly required />
+              </div>
+              <div class="form-group">
+                <input type="text" id="txtNombre" name="txtNombre" value="{{estudiantes.nombre}}"
+                  class="form-control" placeholder="Nombre" maxlength="50" required />
+              </div>
+              <div class="form-group">
+                <input type="text" id="txtMateriaE" name="txtMateriaE" value="{{estudiantes.materiaE}}"
+                  class="form-control" placeholder="Materia" maxlength="50" required />
+              </div>
+              <div class="form-group">
+                <input type="text" id="txNota1" name="txtNota1" value="{{estudiantes.nota1}}"
+                  class="form-control" placeholder="Nota 1" maxlength="2" required />
+              </div>
+              <div class="form-group">
+                <input type="text" id="txNota2" name="txtNota2" value="{{estudiantes.nota2}}"
+                  class="form-control" placeholder="Nota 2" maxlength="2" required />
+              </div>
+              <div class="form-group">
+                <input type="text" id="txNota3" name="txtNota3" value="{{estudiantes.nota3}}"
+                  class="form-control" placeholder="Nota 3" maxlength="2" required />
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'core/base.html' %}
+{% block title %}Iniciar Sesión{% endblock %}
+{% block background %}{% load static %}{% static 'core/img/home.jpg' %}{% endblock %}
+{% block headers %}
+<h1>Iniciar Sesión</h1>
+<span class="subheading">Login</span>
+{% endblock %}{% block content %}
+<body>
+  
+  <div class="col-md-4 offset-md-4">
+    <h2>Ingresar</h2>
+    <div class="card">
+      <div class="card-body">
+        <form> <!--action="/registrarE/" method="POST">-->
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="text" id="txtCorreo" name="txtCorreo" class="form-control"
+              placeholder="Correo" minlength="10" maxlength="10" required
+            />
+          </div>
+          <div class="form-group">
+            <input type="" id="txtPass" name="txtPass" class="form-control"
+              placeholder="Contraseña" maxlength="10" required
+            />
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success btn-block text-white">
+              Iniciar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock %}

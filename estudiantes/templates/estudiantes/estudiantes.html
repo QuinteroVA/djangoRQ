@@ -1,0 +1,91 @@
+{% extends 'core/base.html' %}
+{% block title %}Estudiantes{% endblock %}
+{% block background %}{% load static %}{% static 'core/img/estudiantes.jpg' %}{% endblock %}
+{% block headers %}
+<h1>Estudiantes</h1>
+<span class="subheading">Información Estudiantes</span>
+{% endblock %}
+{% block content %}
+  <body>
+    <div class="row">
+      <div class="col-sm-10 col-md-5 col-lg-3 col-xl-3">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-dismissible alert-success">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong class="text-dark">{{ message }}</strong>
+            </div>
+          {% endfor %}
+        {% endif %}
+        <h2>Ingreso Estudiantes</h2>
+        <div class="card">
+          <div class="card-body">
+            <form action="/registrarE/" method="POST">{% csrf_token %}
+              <div class="form-group">
+                <input type="text" id="txtCedula" name="txtCedula" class="form-control"
+                  placeholder="Cédula" minlength="10" maxlength="10" required />
+              </div>
+              <div class="form-group">
+                <input type="text" id="txtNombre" name="txtNombre" class="form-control"
+                  placeholder="Nombre" maxlength="50" required />
+              </div>
+              <div class="form-group">
+                <input type="text" id="txtMateriaE" name="txtMateriaE" class="form-control"
+                  placeholder="Materia" maxlength="50" required />
+              </div>
+              <div class="form-group">
+                <input type="text" id="txtNota1" name="txtNota1" class="form-control"
+                  placeholder="Nota 1" maxlength="2" required />
+              </div>
+              <div class="form-group">
+                <input type="text" id="txtNota2" name="txtNota2" class="form-control"
+                  placeholder="Nota 2" maxlength="2" required />
+              </div>
+              <div class="form-group">
+                <input type="text" id="txtNota3" name="txtNota3" class="form-control"
+                  placeholder="Nota 3" maxlength="2" required />
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div style="font-size: 0.8em" class="col-sm-14 col-md-7 col-lg-9 col-xl-9">
+        <h2>Listado Estudiantes</h2>
+        <div class="table-responsive py-2">
+          <table class="table table-stripped table-sm">
+            <thead>
+              <tr>
+                <th>Nº</th>
+                <th>Cédula</th>
+                <th>Nombre</th>
+                <th>Materia</th>
+                <th>Nota1</th>
+                <th>Nota2</th>
+                <th>Nota3</th>
+                <th colspan="2">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for e in estudiantes %}
+                <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td>{{e.cedula}}</td>
+                  <td>{{e.nombre}}</td>
+                  <td>{{e.materiaE}}</td>
+                  <td>{{e.nota1}}</td>
+                  <td>{{e.nota2}}</td>
+                  <td>{{e.nota3}}</td>
+                  <td><a href="/editarE/{{e.cedula}}" class="btn btn-warning btn-xs btn-sm">Editar</a></td>
+                  <td><a href="/eliminarE/{{e.cedula}}" class="btn btn-danger btn-xs btn-sm btnEliminacion">Eliminar</a></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+{% endblock %}

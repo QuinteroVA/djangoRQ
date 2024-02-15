@@ -1,0 +1,37 @@
+{% extends 'core/base.html' %}
+{% block title %}Docentes{% endblock %}
+{% block background %}{% load static %}{% static 'core/img/docentes.jpg' %}{% endblock %}
+{% block headers %}
+<h1>Edición</h1>
+<span class="subheading">Información docentes</span>
+{% endblock %}
+{% block content %}
+  <body>
+    <div class="row">
+      <div class="col-md-4 offset-md-4">
+        <h2>Edición Docentes</h2>
+        <div class="card">
+          <div class="card-body">
+            <form action="/actualizarD/" method="POST">{% csrf_token %}
+              <div class="form-group">
+                <input type="text" id="txtCedula" name="txtCedula" value="{{docentes.cedula}}" class="form-control" 
+                  placeholder="Cédula" minlength="10" maxlength="10" readonly required />
+              </div>
+              <div class="form-group">
+                <input type="text" id="txtNombre" name="txtNombre" value="{{docentes.nombre}}"
+                  class="form-control" placeholder="Nombre" maxlength="50" required />
+              </div>
+              <div class="form-group">
+                <input type="text" id="txtMateriaD" name="txtMateriaD" value="{{docentes.materiaD}}"
+                class="form-control" placeholder="Materia" maxlength="50" required />
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+{% endblock %}
